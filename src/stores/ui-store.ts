@@ -17,11 +17,6 @@ const vms: { [k in ToolKey]: new (context: AppContext) => ToolVMClass } = {
   jwt: JwtVM,
 };
 
-function getContentVM(key: ToolKey, context: AppContext): HomeVM | Base64VM {
-  let toolVMClass = key === "home" ? HomeVM : Base64VM;
-  return new toolVMClass(context);
-}
-
 export class UiStore {
   sidebarVM: SidebarVM;
   contentVM!: ToolVMClass;
