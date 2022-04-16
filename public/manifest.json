@@ -1,6 +1,5 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "name": "Web Dev Kit",
   "icons": [
     {
       "src": "favicon.ico",
@@ -19,7 +18,7 @@
     }
   ],
   "start_url": ".",
+  "display_override": ["window-controls-overlay", "standalone"],
   "display": "standalone",
-  "theme_color": "#000000",
   "background_color": "#ffffff"
 }
