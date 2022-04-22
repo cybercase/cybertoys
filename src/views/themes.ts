@@ -1,32 +1,37 @@
-export const darkTheme = {
+import { PartialTheme } from "@fluentui/react";
+
+export const darkTheme: PartialTheme = {
   palette: {
-    themePrimary: "#4f8ce9",
-    themeLighterAlt: "#030609",
-    themeLighter: "#0d1625",
-    themeLight: "#182a46",
-    themeTertiary: "#2f548b",
-    themeSecondary: "#457bcc",
-    themeDarkAlt: "#5f97ea",
-    themeDark: "#76a6ee",
-    themeDarker: "#99bcf2",
-    neutralLighterAlt: "#282828",
-    neutralLighter: "#313131",
-    neutralLight: "#3f3f3f",
-    neutralQuaternaryAlt: "#484848",
-    neutralQuaternary: "#4f4f4f",
-    neutralTertiaryAlt: "#6d6d6d",
-    neutralTertiary: "#f5f5f5",
-    neutralSecondary: "#f6f6f6",
-    neutralPrimaryAlt: "#f8f8f8",
-    neutralPrimary: "#efefef",
-    neutralDark: "#fbfbfb",
-    black: "#fdfdfd",
-    // white: "#1e1e1e",
-    white: "#333333",
+    themePrimary: "#71b6eb",
+    themeLighterAlt: "#050709",
+    themeLighter: "#121d26",
+    themeLight: "#223746",
+    themeTertiary: "#446d8d",
+    themeSecondary: "#63a0ce",
+    themeDarkAlt: "#7ebded",
+    themeDark: "#91c6ef",
+    themeDarker: "#add5f4",
+    neutralLighterAlt: "#2b2b2b",
+    neutralLighter: "#333333",
+    neutralLight: "#414141",
+    neutralQuaternaryAlt: "#4a4a4a",
+    neutralQuaternary: "#515151",
+    neutralTertiaryAlt: "#6f6f6f",
+    neutralTertiary: "#c8c8c8",
+    neutralSecondary: "#d0d0d0",
+    neutralPrimaryAlt: "#dadada",
+    neutralPrimary: "#ffffff",
+    neutralDark: "#f4f4f4",
+    black: "#f8f8f8",
+    white: "#202020",
   },
+  effects: {
+    roundedCorner2: `4px`,
+  },
+  isInverted: true,
 };
 
-export const lightTheme = {
+export const lightTheme: PartialTheme = {
   palette: {
     themePrimary: "#0078d4",
     themeLighterAlt: "#eff6fc",
@@ -50,5 +55,8 @@ export const lightTheme = {
     neutralDark: "#201f1e",
     black: "#000000",
     white: "#ffffff",
+  },
+  effects: {
+    roundedCorner2: `4px`,
   },
 };

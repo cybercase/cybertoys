@@ -1,6 +1,6 @@
 import { css, cx } from "@emotion/css";
 import { initializeIcons } from "@fluentui/font-icons-mdl2";
-import { ThemeProvider, createTheme } from "@fluentui/react";
+import { ThemeProvider, createTheme, useTheme, Text, TooltipHost, IconButton } from "@fluentui/react";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useMemo } from "react";
 import { ToolKey } from "../shared";
@@ -37,11 +37,52 @@ const Main = observer(function Main() {
   const { uiStore } = useContext(Ctx)!;
   const appTheme = useMemo(() => {
     const themeDef = uiStore.theme === "light" ? lightTheme : darkTheme;
+    const palette = themeDef.palette!;
     return createTheme({
       defaultFontStyle: { fontFamily: '-apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu' },
       components: {
         Nav: {
-          styles: { link: { height: `36px`, lineHeight: `36px` }, chevronIcon: { height: `36px` } },
+          styles: {
+            link: {
+              height: `36px`,
+              lineHeight: `36px`,
+              "&:after": {
+                border: "none",
+                width: 4,
+                borderRadius: 2,
+                backgroundColor: palette.themePrimary,
+                height: "66%",
+                top: `calc(34% / 2)`,
+                left: 1,
+              },
+            },
+            chevronIcon: { height: `36px` },
+          },
+        },
+        TextField: {
+          styles: {
+            fieldGroup: {
+              borderTopColor: palette.neutralLight,
+              borderLeftColor: palette.neutralLight,
+              borderRightColor: palette.neutralLight,
+              // borderRadius: 8,
+              ":hover": {
+                borderTopColor: palette.neutralLight,
+                borderLeftColor: palette.neutralLight,
+                borderRightColor: palette.neutralLight,
+              },
+            },
+          },
+        },
+        SearchBox: {
+          styles: {
+            root: {
+              borderTopColor: palette.neutralLight,
+              borderLeftColor: palette.neutralLight,
+              borderRightColor: palette.neutralLight,
+              borderBottomColor: palette.neutralLight,
+            },
+          },
         },
       },
       ...themeDef,
@@ -63,13 +104,28 @@ interface LayoutProps extends ClassNameProp {
 }
 
 const Layout = observer(function Layout({ store, contentEl }: LayoutProps) {
+  const theme = useTheme();
   const styledContentEl = useMemo(
     () =>
       React.cloneElement(contentEl, {
-        className: cx(contentEl.props.className, css({ gridArea: "content" })),
+        className: cx(
+          contentEl.props.className,
+          css({
+            gridArea: "content",
+            backgroundColor: theme.semanticColors.bodyStandoutBackground,
+          })
+        ),
       }),
     [contentEl]
   );
+
+  const { uiStore } = useContext(Ctx)!;
+  const themeParams = useMemo(() => {
+    return {
+      iconProps: { iconName: uiStore.theme === "light" ? "clearnight" : "sunny" },
+      tooltipContent: uiStore.theme === "light" ? "Dark theme" : "Light theme",
+    };
+  }, [uiStore.theme]);
 
   return (
     <div
@@ -80,6 +136,7 @@ const Layout = observer(function Layout({ store, contentEl }: LayoutProps) {
         gridTemplateRows: "auto 1fr",
         gridTemplateAreas: '"sidebar sidebar-separator header"\n "sidebar sidebar-separator content" ',
         overflow: "clip",
+        backgroundColor: theme.semanticColors.bodyBackground,
       })}
     >
       <Titlebar className={css({ gridArea: "header" })} />

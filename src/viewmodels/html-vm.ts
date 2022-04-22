@@ -19,4 +19,12 @@ export class HtmlVM {
     this.encodedText = value;
     this.sourceText = decode(value);
   }
+
+  serialize() {
+    return { sourceText: this.sourceText };
+  }
+
+  deserialize(data: unknown) {
+    this.setSourceText((data as any).sourceText);
+  }
 }

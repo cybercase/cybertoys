@@ -9,7 +9,7 @@ import { codeTextFieldStyle } from "./utils";
 interface JwtProps extends ClassNameProp {
   vm: JwtVM;
 }
-const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className }: JwtProps) {
+const JwtEncoderDecoder = observer(function JwtEncoderDecoder({ vm, className }: JwtProps) {
   const theme = useTheme();
   const textFieldStyles = useConst(() => codeTextFieldStyle);
 
@@ -28,6 +28,29 @@ const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className 
   );
 
   const isSignatureValid = vm.isSignatureValid?.case({ pending: () => null, fulfilled: (value) => !!value });
+  const isHeaderValid = vm.headerText.valid;
+  const isPayloadValid = true;
+
+  let message: string;
+  let messageType: MessageBarType;
+  if (!isHeaderValid) {
+    message = "Invalid header";
+    messageType = MessageBarType.error;
+  } else if (!isPayloadValid) {
+    message = "Invalid payload";
+    messageType = MessageBarType.error;
+  } else {
+    if (isSignatureValid === null) {
+      message = "Loading";
+      messageType = MessageBarType.info;
+    } else if (isSignatureValid) {
+      message = `Valid Signature`;
+      messageType = MessageBarType.success;
+    } else {
+      message = `Invalid Signature`;
+      messageType = MessageBarType.error;
+    }
+  }
 
   return (
     <div className={cx(css({ padding: theme.spacing.m, display: "flex", flexDirection: "column" }), className)}>
@@ -54,18 +77,15 @@ const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className 
         />
       </div>
       <Separator className={css({ marginBottom: theme.spacing.s1, marginTop: theme.spacing.s1 })} />
-      <MessageBar
-        delayedRender={false}
-        messageBarType={isSignatureValid === null ? MessageBarType.info : isSignatureValid ? MessageBarType.success : MessageBarType.error}
-      >
-        {isSignatureValid === null ? "Loading" : isSignatureValid ? `Valid Signature` : `Invalid Signature`}
+      <MessageBar delayedRender={false} messageBarType={messageType}>
+        {message}
       </MessageBar>
       <TextField
         label="Header"
         multiline
         resizable={false}
         readOnly
-        value={vm.headerText}
+        value={vm.headerText.value ?? ""}
         className={css({ flex: "1 1 auto", marginTop: theme.spacing.s1 })}
         styles={textFieldStyles}
       />
@@ -82,4 +102,4 @@ const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className 
   );
 });
 
-export default HtmlEncoderDecoder;
+export default JwtEncoderDecoder;

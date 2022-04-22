@@ -1,5 +1,5 @@
 import { css, cx } from "@emotion/css";
-import { useTheme, Text, FontWeights } from "@fluentui/react";
+import { useTheme, Text, FontWeights, Link } from "@fluentui/react";
 import { observer } from "mobx-react-lite";
 import { HomeVM } from "../viewmodels/home-vm";
 
@@ -14,6 +14,7 @@ const Home = observer(function Home({ vm, className }: HomeProps) {
       <div
         className={css({
           boxShadow: theme.effects.elevation8,
+          backgroundColor: theme.semanticColors.bodyBackground,
           padding: theme.spacing.m,
           display: "flex",
           flexDirection: "column",
@@ -23,13 +24,17 @@ const Home = observer(function Home({ vm, className }: HomeProps) {
         <div>
           <Text variant="mediumPlus" style={{ lineHeight: 1.4 }}>
             Welcome to the <strong className={css({ fontWeight: FontWeights.semibold })}>CyberToys</strong>: a collection of utilities that
-            I've built myself to deal with the everyday developer's challenges.
+            I've built myself to deal with the everyday developer's challenges, inspired by the{" "}
+            <Link href="https://devtoys.app/" target="_blank" rel="noopener noreferrer">
+              DevToys
+            </Link>
           </Text>
         </div>
+        <div></div>
         <div className={css({ textAlign: "right", paddingTop: theme.spacing.m })}>
-          <Text variant="small" className={css({ textAlign: "right" })}>
+          <Link href="https://stefano.brilli.me/" target="_blank" rel="noopener noreferrer">
             Stefano
-          </Text>
+          </Link>
         </div>
       </div>
     </div>

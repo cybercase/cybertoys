@@ -35,7 +35,7 @@ const Base64EncoderDecoder = observer(function Base64EncoderDecoder({ vm, classN
         multiline
         resizable={false}
         onChange={handleSourceChange}
-        value={vm.sourceText}
+        value={vm.cannotDecode ? `Base64 payload is binary. Cannot display.` : vm.sourceText}
         className={css({ flex: "1 1 50%" })}
         styles={textFieldStyles}
       />

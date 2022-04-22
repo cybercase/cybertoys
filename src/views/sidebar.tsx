@@ -1,13 +1,16 @@
 import { css, cx } from "@emotion/css";
-import { useTheme } from "@fluentui/react";
+import { IconButton, TooltipHost, useTheme, Text } from "@fluentui/react";
+import { useId } from "@fluentui/react-hooks";
 import { INavLink, INavLinkGroup, INavProps, Nav } from "@fluentui/react/lib/Nav";
 import { ISearchBoxProps, SearchBox } from "@fluentui/react/lib/SearchBox";
 import { observer } from "mobx-react-lite";
-import { useCallback } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { CategoryKey, ToolKey } from "../shared";
 import { SidebarVM } from "../viewmodels/sidebar-vm";
+import { Ctx } from "./ctx";
 
 const SidebarSearch = observer(function SidebarSearch({ vm }: { vm: SidebarVM }) {
+  const theme = useTheme();
   const handleSearchChange = useCallback<NonNullable<ISearchBoxProps["onChange"]>>(
     (ev, newValue) => {
       vm.setSearchFilter(newValue ?? "");
@@ -18,10 +21,10 @@ const SidebarSearch = observer(function SidebarSearch({ vm }: { vm: SidebarVM })
   return (
     <SearchBox
       placeholder="Search"
-      underlined={true}
+      // underlined={true}
       onChange={handleSearchChange}
       value={vm.searchFilter}
-      className={css({ marginBottom: "28px" })}
+      className={css({ marginBottom: theme.spacing.s1, marginTop: theme.spacing.s2 })}
     />
   );
 });
@@ -51,14 +54,39 @@ const SidebarNav = observer(function SidebarNav({ vm }: { vm: SidebarVM }) {
   );
 
   return (
-    <Nav
-      selectedKey={vm.selected}
-      ariaLabel="Tools"
-      groups={navGroups}
-      onLinkClick={handleLinkClick}
-      onLinkExpandClick={handleLinkExpand}
-      // styles={{ link: { height: `36px`, lineHeight: `36px` }, chevronIcon: { height: `36px` } }}
-    />
+    <div className={css({ flex: "1 1 auto", overflow: "auto" })}>
+      <Nav
+        selectedKey={vm.selected}
+        ariaLabel="Tools"
+        groups={navGroups}
+        onLinkClick={handleLinkClick}
+        onLinkExpandClick={handleLinkExpand}
+      />
+    </div>
+  );
+});
+
+const SidebarSettings = observer(function SidebarSettings() {
+  const theme = useTheme();
+  const { uiStore } = useContext(Ctx)!;
+  const themeParams = useMemo(() => {
+    return {
+      iconProps: { iconName: uiStore.theme === "light" ? "clearnight" : "sunny" },
+      tooltipContent: uiStore.theme === "light" ? "Dark theme" : "Light theme",
+    };
+  }, [uiStore.theme]);
+
+  const handleThemeButtonClick = useCallback<NonNullable<IconButton["props"]["onClick"]>>(() => {
+    uiStore.toggleTheme();
+  }, [uiStore]);
+
+  const tooltipId = useId("tooltip");
+  return (
+    <div className={css({ flex: "0 0 auto" })}>
+      <TooltipHost id={tooltipId} content={themeParams.tooltipContent}>
+        <IconButton iconProps={themeParams.iconProps} title="Theme" ariaLabel="Theme" onClick={handleThemeButtonClick} />
+      </TooltipHost>
+    </div>
   );
 });
 
@@ -74,14 +102,15 @@ const Sidebar = function Sidebar({ vm, className }: SidebarProps) {
         css({
           display: "flex",
           flexDirection: "column",
-          padding: theme.spacing.m,
-          // backgroundColor: theme.palette.neutralLight,
+          padding: theme.spacing.s2,
+          backgroundColor: theme.semanticColors.bodyBackground,
         }),
         className
       )}
     >
       <SidebarSearch vm={vm} />
       <SidebarNav vm={vm} />
+      <SidebarSettings />
     </div>
   );
 };

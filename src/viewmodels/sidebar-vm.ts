@@ -1,4 +1,4 @@
-import { makeAutoObservable, observable } from "mobx";
+import { IReactionDisposer, makeAutoObservable, observable, reaction, when } from "mobx";
 import { AppContext, Category, CategoryKey, ToolKey } from "../shared";
 import { createInstanceMapper } from "../utils";
 
@@ -24,6 +24,11 @@ export class SidebarVM {
   constructor(private context: AppContext) {
     makeAutoObservable(this);
     this._sidebarCategoryAdapter = createInstanceMapper<Category, SidebarCategoryVM>((category) => new SidebarCategoryVM(category));
+
+    reaction(
+      () => this.selected,
+      () => (this.searchFilter = "")
+    );
   }
 
   get categories() {

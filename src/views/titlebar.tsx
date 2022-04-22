@@ -9,36 +9,20 @@ interface TitlebarProps extends ClassNameProp {}
 export const Titlebar = observer(function Titlebar(props: TitlebarProps) {
   const theme = useTheme();
   const { uiStore } = useContext(Ctx)!;
-  const themeParams = useMemo(() => {
-    return {
-      iconProps: { iconName: uiStore.theme === "light" ? "clearnight" : "sunny" },
-      tooltipContent: uiStore.theme === "light" ? "Dark Mode" : "Light Mode",
-    };
-  }, [uiStore.theme]);
-
-  const handleThemeButtonClick = useCallback<NonNullable<IconButton["props"]["onClick"]>>(() => {
-    uiStore.toggleTheme();
-  }, [uiStore]);
-
-  const tooltipId = useId("tooltip");
   return (
     <div
       className={cx(
         css({
+          backgroundColor: theme.semanticColors.bodyStandoutBackground,
+          borderTopLeftRadius: 8,
           padding: theme.spacing.m,
-          display: "flex",
-          alignItems: "center",
-          backgroundColor: theme.palette.neutralLighter,
         }),
         props.className
       )}
     >
-      <Text variant="xxLarge" className={css({ flex: "1 1 auto" })}>
+      <Text variant="large" className={css({ flex: "1 1 auto" })}>
         {uiStore.selectedToolTitle}
       </Text>
-      <TooltipHost id={tooltipId} content={themeParams.tooltipContent}>
-        <IconButton iconProps={themeParams.iconProps} title="Theme" ariaLabel="Theme" onClick={handleThemeButtonClick} />
-      </TooltipHost>
     </div>
   );
 });

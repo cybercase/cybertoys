@@ -11,7 +11,17 @@ const SidebarSeparator = observer(function SidebarSeparator(props: ClassNameProp
   return (
     <div
       className={cx(
-        css({ paddingLeft: `3px`, marginLeft: `-3px`, cursor: "col-resize", display: "flex", justifyContent: "center" }),
+        css({
+          paddingLeft: `2px`,
+          marginLeft: `-3px`,
+          cursor: "col-resize",
+          display: "flex",
+          justifyContent: "center",
+          "& :first-child": { visibility: "hidden" },
+          // "&:hover": {
+          //   "& :first-child": { visibility: "visible" },
+          // },
+        }),
         props.className
       )}
       onMouseDown={handleMouseDown}

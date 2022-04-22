@@ -15,9 +15,9 @@ export interface Category {
 
 export const Tools = [
   { key: "home", label: "Home", title: "Home" },
-  { key: "base64", label: "Base 64", title: "Base 64 Decode and Encoder", category: "encdec" },
-  { key: "url", label: "URL", title: "URL Decode and Encode", category: "encdec" },
-  { key: "html", label: "HTML", title: "HTML Decode and Encode", category: "encdec" },
+  { key: "base64", label: "Base 64", title: "Base 64 Decoder and Encoder", category: "encdec" },
+  { key: "url", label: "URL", title: "URL Decoder and Encoder", category: "encdec" },
+  { key: "html", label: "HTML", title: "HTML Decoder and Encoder", category: "encdec" },
   { key: "jwt", label: "JWT", title: "JWT Decoder", category: "encdec" },
 ] as const;
 

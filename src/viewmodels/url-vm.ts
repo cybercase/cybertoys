@@ -18,4 +18,12 @@ export class UrlVM {
     this.encodedText = value;
     this.sourceText = decodeURI(value);
   }
+
+  serialize() {
+    return { sourceText: this.sourceText };
+  }
+
+  deserialize(data: unknown) {
+    this.setSourceText((data as any).sourceText);
+  }
 }

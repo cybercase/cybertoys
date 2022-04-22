@@ -10,3 +10,14 @@ export function createInstanceMapper<A extends object, B>(fn: (input: A) => B) {
     return extension;
   };
 }
+
+export function debounce<T extends Function>(func: T, timeout = 300): T {
+  let timer: ReturnType<typeof setTimeout>;
+  const debouncedFn = (...args: any) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func(...args);
+    }, timeout);
+  };
+  return debouncedFn as any as T;
+}
