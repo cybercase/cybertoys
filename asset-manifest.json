@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/cybertoys/static/css/main.c528bdfe.css",
-    "main.js": "/cybertoys/static/js/main.72a0efc2.js",
+    "main.js": "/cybertoys/static/js/main.0d726aac.js",
     "static/js/377.5c788780.chunk.js": "/cybertoys/static/js/377.5c788780.chunk.js",
     "service-worker.js": "/cybertoys/service-worker.js",
     "index.html": "/cybertoys/index.html",
     "main.c528bdfe.css.map": "/cybertoys/static/css/main.c528bdfe.css.map",
-    "main.72a0efc2.js.map": "/cybertoys/static/js/main.72a0efc2.js.map",
+    "main.0d726aac.js.map": "/cybertoys/static/js/main.0d726aac.js.map",
     "377.5c788780.chunk.js.map": "/cybertoys/static/js/377.5c788780.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c528bdfe.css",
-    "static/js/main.72a0efc2.js"
+    "static/js/main.0d726aac.js"
   ]
 }
