@@ -16,6 +16,7 @@ import Home from "./home";
 import Url from "./url";
 import Html from "./html";
 import Jwt from "./jwt";
+import Hash from "./hash";
 
 initializeIcons();
 
@@ -31,6 +32,7 @@ const componentMap: {
   url: Url,
   html: Html,
   jwt: Jwt,
+  hash: Hash,
 };
 
 const Main = observer(function Main() {

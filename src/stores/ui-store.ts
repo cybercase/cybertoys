@@ -1,6 +1,7 @@
 import { makeAutoObservable, reaction } from "mobx";
 import type { AppContext, ToolKey } from "../shared";
 import { Base64VM } from "../viewmodels/base64-vm";
+import { HashVM } from "../viewmodels/hash-vm";
 import { HomeVM } from "../viewmodels/home-vm";
 import { HtmlVM } from "../viewmodels/html-vm";
 import { JwtVM } from "../viewmodels/jwt-vm";
@@ -15,6 +16,7 @@ const vms: { [k in ToolKey]: new (context: AppContext) => ToolVMClass } = {
   url: UrlVM,
   html: HtmlVM,
   jwt: JwtVM,
+  hash: HashVM,
 };
 
 export class UiStore {
@@ -30,25 +32,27 @@ export class UiStore {
 
     makeAutoObservable(this);
 
+    context.uiStore = this;
+
     reaction(
       () => this.selectedToolKey,
       (toolKey, prevToolKey) => {
         // Save old state
         const toolState = this.contentVM?.serialize?.() ?? null;
-        if (toolState) {
-          this.context.preference.save(prevToolKey, toolState);
+        if (toolState && prevToolKey) {
+          this.context.session.save(prevToolKey, toolState);
         }
 
         // Instantiate new ToolVM
         this.contentVM = new vms[toolKey](this.context);
 
         // Load saved state
-        const storedState = this.context.preference.load(toolKey, null);
+        const storedState = this.context.session.load(toolKey, null);
         if (storedState !== null) {
           this.contentVM.deserialize?.(storedState);
         }
       },
-      { name: `UiStore-Selection` }
+      { name: `UiStore-Selection`, fireImmediately: true }
     );
   }
 

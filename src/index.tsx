@@ -11,6 +11,7 @@ import { UiStore } from "./stores/ui-store";
 import { configure as configureMobx } from "mobx";
 import { ModelStore } from "./stores/model-store";
 import { PreferenceService } from "./preference";
+import { SessionService } from "./session";
 
 const isProduction = process.env.NODE_ENV === "production";
 if (!isProduction) {
@@ -26,6 +27,7 @@ if (!isProduction) {
 // WARNING: The order of inizialization matters!
 const context = new AppContext();
 context.preference = new PreferenceService();
+context.session = new SessionService();
 context.modelStore = new ModelStore(context);
 context.uiStore = new UiStore(context);
 

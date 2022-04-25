@@ -22,9 +22,8 @@ export class SidebarVM {
   _sidebarCategoryAdapter: (category: Category) => SidebarCategoryVM;
 
   constructor(private context: AppContext) {
-    makeAutoObservable(this);
     this._sidebarCategoryAdapter = createInstanceMapper<Category, SidebarCategoryVM>((category) => new SidebarCategoryVM(category));
-
+    makeAutoObservable(this);
     reaction(
       () => this.selected,
       () => (this.searchFilter = "")

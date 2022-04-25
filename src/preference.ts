@@ -1,8 +1,6 @@
 import { debounce } from "./utils";
 
-const PreferenceKeyValues = ["sidebar-width", "theme"] as const;
-
-export type PreferenceKey = string; //typeof PreferenceKeyValues[number];
+export type PreferenceKey = string;
 
 export class PreferenceService {
   saveDebounced = debounce(this.save, 500);

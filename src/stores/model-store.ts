@@ -1,13 +1,20 @@
-import { makeAutoObservable, ObservableMap } from "mobx";
+import { makeAutoObservable, ObservableMap, reaction } from "mobx";
 import { AppContext, Categories, Category, CategoryKey, Tool, ToolKey, Tools } from "../shared";
 
 export class ModelStore {
   tools = new ObservableMap<ToolKey, Tool>();
   categories = new ObservableMap<CategoryKey, Category>();
-  selectedToolKey: ToolKey = "home";
+  selectedToolKey: ToolKey;
 
   constructor(private context: AppContext) {
+    this.selectedToolKey = this.context.preference.load("model.lastUsedToolKey", "home");
     makeAutoObservable(this);
+    reaction(
+      () => this.selectedToolKey,
+      (toolKey) => {
+        this.context.preference.save("model.lastUsedToolKey", toolKey);
+      }
+    );
   }
 
   load(tools: readonly Tool[], categories: readonly Category[]) {

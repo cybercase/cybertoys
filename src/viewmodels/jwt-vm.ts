@@ -18,7 +18,6 @@ export class JwtVM {
     const signatureValidationDisposer = reaction(
       () => [this.secretKey, this.tokenText],
       ([secretKey, tokenText]) => {
-        console.log("ehi", secretKey, tokenText);
         this.isSignatureValid = fromPromise(
           (async () => {
             const textEncoder = new TextEncoder();
@@ -36,7 +35,7 @@ export class JwtVM {
     );
 
     when(
-      () => context.uiStore.selectedToolKey !== "jwt",
+      () => this.context.uiStore.selectedToolKey !== "jwt",
       () => {
         signatureValidationDisposer();
       }

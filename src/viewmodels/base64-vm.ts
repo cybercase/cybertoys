@@ -2,17 +2,12 @@ import { makeAutoObservable, reaction, when } from "mobx";
 import { AppContext } from "../shared";
 
 export class Base64VM {
-  static preferences = {
-    source: "base64.sourceText",
-  } as const;
-
   sourceText = "";
   encodedText = "";
   cannotDecode = false;
 
   constructor(public context: AppContext) {
     makeAutoObservable(this);
-    this.setSourceText(this.context.preference.load(Base64VM.preferences.source, ""));
   }
 
   setSourceText(value: string) {
