@@ -17,9 +17,11 @@ export const Tools = [
   { key: "home", label: "Home", title: "Home" },
   { key: "base64", label: "Base 64", title: "Base 64 Decoder and Encoder", category: "encdec" },
   { key: "url", label: "URL", title: "URL Decoder and Encoder", category: "encdec" },
+  { key: "urlparser", label: "URL Parser", title: "URL Parser", category: "encdec" },
   { key: "html", label: "HTML", title: "HTML Decoder and Encoder", category: "encdec" },
   { key: "jwt", label: "JWT", title: "JWT Decoder", category: "encdec" },
   { key: "hash", label: "Hash", title: "Hash Generator", category: "generators" },
+  { key: "lorem", label: "Lorem Ipsum", title: "Lorem Ipsum Generator", category: "generators" },
 ] as const;
 
 // export type ToolKey = typeof Tools[number]["key"];

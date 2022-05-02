@@ -54,15 +54,7 @@ const JwtEncoderDecoder = observer(function JwtEncoderDecoder({ vm, className }:
 
   return (
     <div className={cx(css({ padding: theme.spacing.m, display: "flex", flexDirection: "column" }), className)}>
-      <TextField
-        label="Token"
-        multiline
-        resizable={false}
-        onChange={handleTokenChange}
-        value={vm.tokenText}
-        className={cx(css({ flex: "1 1 auto" }))}
-        styles={textFieldStyles}
-      />
+      <TextField label="Token" multiline resizable={false} onChange={handleTokenChange} value={vm.tokenText} styles={textFieldStyles} />
       <div className={css({ marginTop: theme.spacing.s1 })}>
         <div className={css({ display: "flex" })}>
           <Label>Secret key</Label>
@@ -72,32 +64,34 @@ const JwtEncoderDecoder = observer(function JwtEncoderDecoder({ vm, className }:
           resizable={false}
           onChange={handleSecretOrPrivateKeyChange}
           value={vm.secretKey}
-          rows={4}
+          rows={3}
           styles={textFieldStyles}
         />
       </div>
-      <Separator className={css({ marginBottom: theme.spacing.s1, marginTop: theme.spacing.s1 })} />
+      <Separator />
       <MessageBar delayedRender={false} messageBarType={messageType}>
         {message}
       </MessageBar>
-      <TextField
-        label="Header"
-        multiline
-        resizable={false}
-        readOnly
-        value={vm.headerText.value ?? ""}
-        className={css({ flex: "1 1 auto", marginTop: theme.spacing.s1 })}
-        styles={textFieldStyles}
-      />
-      <TextField
-        label="Payload"
-        multiline
-        readOnly
-        resizable={false}
-        value={vm.payloadText}
-        className={css({ flex: "1 1 auto", marginTop: theme.spacing.s1 })}
-        styles={textFieldStyles}
-      />
+      <div className={css({ display: "flex", flex: "1 1 auto" })}>
+        <TextField
+          label="Payload"
+          multiline
+          readOnly
+          resizable={false}
+          value={vm.payloadText}
+          className={css({ flex: "1 1 auto", marginTop: theme.spacing.s1, marginRight: theme.spacing.s1 })}
+          styles={textFieldStyles}
+        />
+        <TextField
+          label="Header"
+          multiline
+          resizable={false}
+          readOnly
+          value={vm.headerText.value ?? ""}
+          className={css({ flex: "1 1 auto", marginTop: theme.spacing.s1, marginLeft: theme.spacing.s1 })}
+          styles={textFieldStyles}
+        />
+      </div>
     </div>
   );
 });

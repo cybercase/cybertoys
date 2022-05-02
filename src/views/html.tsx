@@ -2,17 +2,14 @@ import { observer } from "mobx-react-lite";
 import { useCallback } from "react";
 import { useTheme, TextField, ITextFieldProps } from "@fluentui/react";
 import { css, cx } from "@emotion/css";
-import { useConst } from "@fluentui/react-hooks";
 import { HtmlVM } from "../viewmodels/html-vm";
+import { codeTextFieldStyle } from "./utils";
 
 interface HtmlProps extends ClassNameProp {
   vm: HtmlVM;
 }
 const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className }: HtmlProps) {
   const theme = useTheme();
-  const textFieldStyles = useConst(() => {
-    return { wrapper: { height: "100%", display: "flex", flexDirection: "column" }, fieldGroup: { flex: "1 1 auto" } };
-  });
 
   const handleSourceChange = useCallback<NonNullable<ITextFieldProps["onChange"]>>(
     (_, newValue) => {
@@ -31,13 +28,13 @@ const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className 
   return (
     <div className={cx(css({ padding: theme.spacing.m, display: "flex", flexDirection: "column" }), className)}>
       <TextField
-        label="Source"
+        label="Decoded"
         multiline
         resizable={false}
         onChange={handleSourceChange}
         value={vm.sourceText}
         className={css({ flex: "1 1 50%" })}
-        styles={textFieldStyles}
+        styles={codeTextFieldStyle}
       />
       <TextField
         label="Encoded"
@@ -46,7 +43,7 @@ const HtmlEncoderDecoder = observer(function HtmlEncoderDecoder({ vm, className 
         onChange={handleEncodedChange}
         value={vm.encodedText}
         className={css({ flex: "1 1 50%", marginTop: theme.spacing.m })}
-        styles={textFieldStyles}
+        styles={codeTextFieldStyle}
       />
     </div>
   );

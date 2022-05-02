@@ -5,8 +5,10 @@ import { HashVM } from "../viewmodels/hash-vm";
 import { HomeVM } from "../viewmodels/home-vm";
 import { HtmlVM } from "../viewmodels/html-vm";
 import { JwtVM } from "../viewmodels/jwt-vm";
+import { LoremVM } from "../viewmodels/lorem-vm";
 import { SidebarVM } from "../viewmodels/sidebar-vm";
 import { UrlVM } from "../viewmodels/url-vm";
+import { UrlParserVM } from "../viewmodels/urlparser-vm";
 
 type ToolVMClass = (HomeVM | Base64VM | UrlVM | HtmlVM) & { serialize?: () => unknown; deserialize?: (value: unknown) => void };
 
@@ -17,6 +19,8 @@ const vms: { [k in ToolKey]: new (context: AppContext) => ToolVMClass } = {
   html: HtmlVM,
   jwt: JwtVM,
   hash: HashVM,
+  lorem: LoremVM,
+  urlparser: UrlParserVM,
 };
 
 export class UiStore {

@@ -15,8 +15,10 @@ import Base64 from "./base64";
 import Home from "./home";
 import Url from "./url";
 import Html from "./html";
-import Jwt from "./jwt";
-import Hash from "./hash";
+import Jwt from "./jwt-ui";
+import Hash from "./hash-ui";
+import Lorem from "./lorem-ui";
+import UrlParser from "./urlparser-ui";
 
 initializeIcons();
 
@@ -33,6 +35,8 @@ const componentMap: {
   html: Html,
   jwt: Jwt,
   hash: Hash,
+  lorem: Lorem,
+  urlparser: UrlParser,
 };
 
 const Main = observer(function Main() {
@@ -67,6 +71,7 @@ const Main = observer(function Main() {
               borderTopColor: palette.neutralLight,
               borderLeftColor: palette.neutralLight,
               borderRightColor: palette.neutralLight,
+              borderBottomColor: palette.neutralTertiary,
               // borderRadius: 8,
               ":hover": {
                 borderTopColor: palette.neutralLight,

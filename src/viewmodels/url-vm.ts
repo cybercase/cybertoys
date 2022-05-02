@@ -11,12 +11,12 @@ export class UrlVM {
 
   setSourceText(value: string) {
     this.sourceText = value;
-    this.encodedText = encodeURI(value);
+    this.encodedText = encodeURIComponent(value);
   }
 
   setEncodedText(value: string) {
     this.encodedText = value;
-    this.sourceText = decodeURI(value);
+    this.sourceText = decodeURIComponent(value);
   }
 
   serialize() {
