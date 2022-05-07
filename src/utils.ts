@@ -21,3 +21,5 @@ export function debounce<T extends Function>(func: T, timeout = 300): T {
   };
   return debouncedFn as any as T;
 }
+
+export type PropOf<A> = A extends React.ComponentType<infer P> ? P : never;

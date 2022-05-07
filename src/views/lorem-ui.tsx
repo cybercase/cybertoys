@@ -1,17 +1,18 @@
 import { observer } from "mobx-react-lite";
 import { useCallback } from "react";
-import { useTheme, TextField, SpinButton, Dropdown, Position, IconButton } from "@fluentui/react";
+import { useTheme, TextField, SpinButton, Dropdown, Position, IconButton, Toggle } from "@fluentui/react";
 import { css, cx } from "@emotion/css";
 import { useConst } from "@fluentui/react-hooks";
 import { LoremVM } from "../viewmodels/lorem-vm";
+import { PropOf } from "../utils";
 
 interface LoremProps extends ClassNameProp {
   vm: LoremVM;
 }
 
-type PropOf<A> = A extends React.ComponentType<infer P> ? P : never;
 type DropdownOnChangeHandler = NonNullable<PropOf<typeof Dropdown>["onChange"]>;
 type SpinButtonOnChangeHandler = NonNullable<PropOf<typeof SpinButton>["onChange"]>;
+type ToggleOnChangeHandler = NonNullable<PropOf<typeof Toggle>["onChange"]>;
 
 const LoremEncoderDecoder = observer(function LoremEncoderDecoder({ vm, className }: LoremProps) {
   const theme = useTheme();
@@ -43,8 +44,14 @@ const LoremEncoderDecoder = observer(function LoremEncoderDecoder({ vm, classNam
     vm.regenerate();
   }, [vm]);
 
+  const handleRandomize = useCallback<ToggleOnChangeHandler>(
+    (event, checked) => {
+      vm.setRandomize(checked ?? false);
+    },
+    [vm]
+  );
+
   const options = useConst(() => [
-    { key: "standard", text: "Classic Paragraphs" },
     { key: "paragraphs", text: "Paragraphs" },
     { key: "sentences", text: "Sentences" },
     { key: "words", text: "Words" },
@@ -57,7 +64,6 @@ const LoremEncoderDecoder = observer(function LoremEncoderDecoder({ vm, classNam
           label="Type"
           selectedKey={vm.type}
           onChange={handleTypeChange}
-          placeholder="Select an option"
           options={options}
           styles={{ dropdown: { width: 300 }, label: { lineHeight: 19 }, root: { marginRight: theme.spacing.m } }}
         />
@@ -73,7 +79,15 @@ const LoremEncoderDecoder = observer(function LoremEncoderDecoder({ vm, classNam
           decrementButtonAriaLabel="Decrease value by 1"
           styles={{ spinButtonWrapper: { width: 75 }, root: { flex: "0", marginRight: theme.spacing.m } }}
         />
-        <IconButton iconProps={{ iconName: "Refresh" }} aria-label="Regenerate" onClick={handleRegenerateClick} />
+        <Toggle
+          label={"Random"}
+          onText="On"
+          offText="Off"
+          onChange={handleRandomize}
+          checked={vm.randomize}
+          styles={{ label: { lineHeight: 18, marginBottom: 4 } }}
+        />
+        {vm.randomize ? <IconButton iconProps={{ iconName: "Refresh" }} aria-label="Regenerate" onClick={handleRegenerateClick} /> : null}
       </div>
       <TextField
         label="Output"
