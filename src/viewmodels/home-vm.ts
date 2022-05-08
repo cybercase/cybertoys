@@ -5,4 +5,8 @@ export class HomeVM {
   constructor(public context: AppContext) {
     makeAutoObservable(this);
   }
+
+  serialize() {}
+
+  deserialize(data: unknown) {}
 }

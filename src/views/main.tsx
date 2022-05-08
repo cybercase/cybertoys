@@ -19,6 +19,7 @@ import Jwt from "./jwt-ui";
 import Hash from "./hash-ui";
 import Lorem from "./lorem-ui";
 import UrlParser from "./urlparser-ui";
+import Uuid from "./uuid-ui";
 
 initializeIcons();
 
@@ -37,6 +38,7 @@ const componentMap: {
   hash: Hash,
   lorem: Lorem,
   urlparser: UrlParser,
+  uuid: Uuid,
 };
 
 const Main = observer(function Main() {

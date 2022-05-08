@@ -9,8 +9,12 @@ import { LoremVM } from "../viewmodels/lorem-vm";
 import { SidebarVM } from "../viewmodels/sidebar-vm";
 import { UrlVM } from "../viewmodels/url-vm";
 import { UrlParserVM } from "../viewmodels/urlparser-vm";
+import { UuidVM } from "../viewmodels/uuid-vm";
 
-type ToolVMClass = (HomeVM | Base64VM | UrlVM | HtmlVM) & { serialize?: () => unknown; deserialize?: (value: unknown) => void };
+interface ToolVMClass {
+  serialize?: () => unknown;
+  deserialize?: (value: unknown) => void;
+}
 
 const vms: { [k in ToolKey]: new (context: AppContext) => ToolVMClass } = {
   home: HomeVM,
@@ -21,6 +25,7 @@ const vms: { [k in ToolKey]: new (context: AppContext) => ToolVMClass } = {
   hash: HashVM,
   lorem: LoremVM,
   urlparser: UrlParserVM,
+  uuid: UuidVM,
 };
 
 export class UiStore {

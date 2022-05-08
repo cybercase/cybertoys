@@ -22,6 +22,7 @@ export const Tools = [
   { key: "jwt", label: "JWT", title: "JWT Decoder", category: "encdec" },
   { key: "hash", label: "Hash", title: "Hash Generator", category: "generators" },
   { key: "lorem", label: "Lorem Ipsum", title: "Lorem Ipsum Generator", category: "generators" },
+  { key: "uuid", label: "UUID", title: "UUID Generator", category: "generators" },
 ] as const;
 
 // export type ToolKey = typeof Tools[number]["key"];
