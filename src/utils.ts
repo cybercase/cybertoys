@@ -23,3 +23,18 @@ export function debounce<T extends Function>(func: T, timeout = 300): T {
 }
 
 export type PropOf<A> = A extends React.ComponentType<infer P> ? P : never;
+
+export function humanFileSize(size: number): string {
+  // https://stackoverflow.com/a/20732091
+  let i = Math.floor(Math.log(size) / Math.log(1024));
+  size = size / Math.pow(1024, i);
+  return size.toFixed(2) + " " + ["B", "kB", "MB", "GB", "TB"][i];
+}
+
+export function debugEnabled() {
+  return process.env.NODE_ENV === "development";
+}
+
+export function getPublicPathFor(script: string) {
+  return `${process.env.PUBLIC_URL}/${script}`;
+}

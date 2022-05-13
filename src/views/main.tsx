@@ -20,6 +20,7 @@ import Hash from "./hash-ui";
 import Lorem from "./lorem-ui";
 import UrlParser from "./urlparser-ui";
 import Uuid from "./uuid-ui";
+import GifGenerator from "./gif-ui";
 
 initializeIcons();
 
@@ -39,6 +40,7 @@ const componentMap: {
   lorem: Lorem,
   urlparser: UrlParser,
   uuid: Uuid,
+  gif: GifGenerator,
 };
 
 const Main = observer(function Main() {

@@ -3,6 +3,7 @@ import type { AppContext } from "./context";
 export const Categories = [
   { key: "encdec", label: "Encoders / Decoders" },
   { key: "generators", label: "Generators" },
+  { key: "graphic", label: "Graphic" },
 ] as const;
 
 // export type CategoryKey = typeof Categories[number]["key"];
@@ -23,6 +24,7 @@ export const Tools = [
   { key: "hash", label: "Hash", title: "Hash Generator", category: "generators" },
   { key: "lorem", label: "Lorem Ipsum", title: "Lorem Ipsum Generator", category: "generators" },
   { key: "uuid", label: "UUID", title: "UUID Generator", category: "generators" },
+  { key: "gif", label: "GIF Converter", title: "GIF Converter", category: "graphic" },
 ] as const;
 
 // export type ToolKey = typeof Tools[number]["key"];

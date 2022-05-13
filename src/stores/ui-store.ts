@@ -1,6 +1,7 @@
 import { makeAutoObservable, reaction } from "mobx";
 import type { AppContext, ToolKey } from "../shared";
 import { Base64VM } from "../viewmodels/base64-vm";
+import { GifVM } from "../viewmodels/gif-vm";
 import { HashVM } from "../viewmodels/hash-vm";
 import { HomeVM } from "../viewmodels/home-vm";
 import { HtmlVM } from "../viewmodels/html-vm";
@@ -26,6 +27,7 @@ const vms: { [k in ToolKey]: new (context: AppContext) => ToolVMClass } = {
   lorem: LoremVM,
   urlparser: UrlParserVM,
   uuid: UuidVM,
+  gif: GifVM,
 };
 
 export class UiStore {

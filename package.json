@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/css": "^11.7.1",
+    "@ffmpeg/ffmpeg": "^0.6.1",
     "@fluentui/react": "^8.62.0",
     "@fluentui/react-hooks": "^8.5.3",
     "@testing-library/jest-dom": "^5.16.2",
@@ -25,6 +26,7 @@
     "mobx-utils": "^6.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-dropzone": "^14.2.1",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
     "spark-md5": "^3.0.2",

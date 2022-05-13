@@ -77,8 +77,8 @@ const UuidGenerator = observer(function UuidEncoderDecoder({ vm, className }: Uu
           checked={vm.uppercase}
           styles={{ label: { lineHeight: 18, marginBottom: 4 }, root: { marginRight: theme.spacing.m, minWidth: 78 } }}
         />
-        <PrimaryButton text="Generate" onClick={handleGenerate} allowDisabledFocus styles={{ root: { marginRight: theme.spacing.m } }} />
-        <DefaultButton text="Clear" onClick={handleClear} allowDisabledFocus />
+        <PrimaryButton text="Generate" onClick={handleGenerate} styles={{ root: { marginRight: theme.spacing.m } }} />
+        <DefaultButton text="Clear" onClick={handleClear} />
         {/* <IconButton iconProps={{ iconName: "Trash" }} aria-label="Regenerate" onClick={handleClear} /> */}
       </div>
       <TextField
