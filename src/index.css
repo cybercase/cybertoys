@@ -136,3 +136,13 @@ body,
 * {
   box-sizing: border-box;
 }
+
+/* TODO: this should be moved somewhere else when refactoring the code-screenshot tool */
+.CodeMirror.CodeMirror-wrap {
+  height: auto;
+  font-family: inherit;
+  padding: 16px;
+}
+.CodeMirror-scroll {
+  min-height: 200px;
+}

@@ -1,3 +1,4 @@
+import { HtmlRenderer } from "./html-renderer";
 import { PreferenceService } from "./preference";
 import { SessionService } from "./session";
 import { ModelStore } from "./stores/model-store";
@@ -8,4 +9,5 @@ export class AppContext {
   public uiStore!: UiStore;
   public preference!: PreferenceService;
   public session!: SessionService;
+  public htmlRenderer!: HtmlRenderer;
 }

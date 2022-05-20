@@ -25,6 +25,7 @@ export const Tools = [
   { key: "lorem", label: "Lorem Ipsum", title: "Lorem Ipsum Generator", category: "generators" },
   { key: "uuid", label: "UUID", title: "UUID Generator", category: "generators" },
   { key: "gif", label: "GIF Converter", title: "GIF Converter", category: "graphic" },
+  { key: "codeScreenshot", label: "Code Screenshot", title: "Code Screenshot", category: "graphic" },
 ] as const;
 
 // export type ToolKey = typeof Tools[number]["key"];

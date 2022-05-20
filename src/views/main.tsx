@@ -1,6 +1,6 @@
 import { css, cx } from "@emotion/css";
 import { initializeIcons } from "@fluentui/font-icons-mdl2";
-import { ThemeProvider, createTheme, useTheme, Text, TooltipHost, IconButton } from "@fluentui/react";
+import { ThemeProvider, createTheme, useTheme } from "@fluentui/react";
 import { observer } from "mobx-react-lite";
 import React, { ReactElement, useContext, useMemo } from "react";
 import { ToolKey } from "../shared";
@@ -21,6 +21,7 @@ import Lorem from "./lorem-ui";
 import UrlParser from "./urlparser-ui";
 import Uuid from "./uuid-ui";
 import GifGenerator from "./gif-ui";
+import CodeScreenshot from "./code-screenshot-ui";
 
 initializeIcons();
 
@@ -41,6 +42,7 @@ const componentMap: {
   urlparser: UrlParser,
   uuid: Uuid,
   gif: GifGenerator,
+  codeScreenshot: CodeScreenshot,
 };
 
 const Main = observer(function Main() {
@@ -123,6 +125,8 @@ const Layout = observer(function Layout({ store, contentEl }: LayoutProps) {
           contentEl.props.className,
           css({
             gridArea: "content",
+            minWidth: "0",
+            minHeight: "0",
             backgroundColor: theme.semanticColors.bodyStandoutBackground,
           })
         ),

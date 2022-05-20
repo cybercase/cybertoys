@@ -12,6 +12,7 @@ import { configure as configureMobx } from "mobx";
 import { ModelStore } from "./stores/model-store";
 import { PreferenceService } from "./preference";
 import { SessionService } from "./session";
+import { HtmlRenderer } from "./html-renderer";
 
 const isProduction = process.env.NODE_ENV === "production";
 if (!isProduction) {
@@ -30,6 +31,7 @@ context.preference = new PreferenceService();
 context.session = new SessionService();
 context.modelStore = new ModelStore(context);
 context.uiStore = new UiStore(context);
+context.htmlRenderer = new HtmlRenderer(document);
 
 // Init
 context.modelStore.load(Tools, Categories);
